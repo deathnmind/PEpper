@@ -6,10 +6,12 @@ import string
 
 
 # checks if the PE matches some YARA rules (database: ~/rules)
-
-
 def get_yara(path):
-    root_dir = os.path.dirname(sys.modules['__main__'].__file__)
+    import __main__
+    main_name = __main__.__file__
+    root_dir = pathlib.Path(main_name).parent.absolute()
+    print(f"root_dir is {root_dir}")
+    print(f"I am going to return ... {os.path.join(root_dir, 'rules', path)}")
     return os.path.join(root_dir, 'rules', path)
 
 
